@@ -142,7 +142,9 @@ nav {
     display: flex;
     justify-content: flex-end;
   }
-
+#brand-title {
+  width: 400px;
+}
   button.login {
     background-color: rgb(247, 98, 14);
     color: #eee;
