@@ -35,7 +35,7 @@
                    <div class="card-body">
                        
                      <div class="delivery-scooter">
-                         <img src="https://i.postimg.cc/yNFsmf1c/delivery-2-removebg-preview.png" width="120" height="120" alt="">
+                         <img src="https://i.postimg.cc/j23qRnDM/delivery-3.jpg" width="120" height="120" alt="">
                      </div>
                     <div class="row my-4">
                         <div class="display-category">
@@ -74,9 +74,7 @@
                          </div>
                      </div>
 
-                     <!-- <div class="row landing-food">
-
-                     </div> -->
+                     <hr>
                      <div class="row my-5">
                          <div class="icons-events">
                              <div class="mobile">

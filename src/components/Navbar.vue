@@ -27,7 +27,7 @@
               <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- CONTENT -->
-            <div class="modal-body">
+            <form @submit.prevent="login" class="modal-body">
 
               
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
@@ -35,11 +35,11 @@
               <p class="text-secondary mb-5">Please enter your login and password!</p>
               
               <div class="form-outline form-white mb-4">
-                <input type="email" id="typeEmailX" class="form-control form-control-lg" placeholder="Email"/>
+                <input type="email" v-model="email" id="typeEmailX" class="form-control form-control-lg" placeholder="Email"/>
               </div>
 
               <div class="form-outline form-white mb-4">
-                <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Password"/>
+                <input type="password" v-model="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Password"/>
               </div>
 
               <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
@@ -52,7 +52,7 @@
                 <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
               </div>
 
-            </div>
+            </form>
 
             <div>
               <p class="mb-5">Don't have an account? <a href="#!" class="text-secondary fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#SignUp" data-bs-dismiss="modal" aria-label="Close">Sign Up</a></p>
@@ -107,7 +107,36 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      fetch("http://localhost:3100/users/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          localStorage.setItem("jwt", json.jwt);
+          console.log(json.jwt)
+          alert("User logged in");
+          this.$router.push({ name: "Products" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
+  },
 }
 </script>
 
