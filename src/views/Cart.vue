@@ -1,13 +1,18 @@
 <template>
+  <Navbar/>
   
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue'
 export default {
-    data() {
-    return {
-      products: null,
-    };
+  components: {
+    Navbar
+  },
+  data() {
+  return {
+    products: null,
+  };
   },
   mounted() {
     if (localStorage.getItem("jwt")) {

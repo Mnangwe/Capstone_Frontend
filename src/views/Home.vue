@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <NavHome />
   <section class="home-intro">
     <div class="container">
       <div class="intro">
@@ -30,13 +30,13 @@
 
 <script>
 // @ is an alias to /src
-import Navbar from '@/components/Navbar.vue'
+import NavHome from '@/components/NavHome.vue'
 import Events from '@/components/Events.vue'
 
 export default {
   name: 'Home',
   components: {
-    Navbar,
+    NavHome,
     Events
   }
 }
