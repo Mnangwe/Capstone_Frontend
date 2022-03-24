@@ -3,18 +3,18 @@
        <div class="marketing">
          <div class="container">
            <div class="advert">
-             <p>Our Kasi Favourit Spot Don't Miss Out. Zwakala Estratweni</p>
+             <marquee behavior="" width="100%" direction="">Our Kasi Favourit Spot Don't Miss Out. Zwakala Estratweni</marquee>
            </div>
          </div>
        </div>
-       <header class="bg-dark">
+       <header class="">
           <h3>
           Welcome to e-Stratweni Mobile Foods
           </h3>
           <nav class="navbar navbar-expand-lg" id="nav"  :class="{ active: isActive }">
             <div class="container-fluid">
               <a class="navbar-brand" href="#"><img src="https://i.postimg.cc/VkJLXBdR/logo-2-removebg-preview.png" width="60" height="60" alt=""></a>
-              <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler  text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -83,9 +83,12 @@ export default {
   color: white;
   background: linear-gradient(95deg,#059dff 15%, #6549d5 45%, #e33fa1 75%, #fb5343 100% ) 95%/200% 100%;
 }
-
+header h3 {
+  color: #2c3e50; 
+}
 header {
   width: 100%;
+  background: #fff;
 }
 .nav h2, .nav nav {
   text-align: left;

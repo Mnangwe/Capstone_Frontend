@@ -39,12 +39,18 @@
   color: #2c3e50;
   /* color: antiquewhite; */
 }
+#nav a:hover {
+  font-weight: bold;
+  color: rgb(247, 98, 14);
+  transform: scale(1.1);
+  /* color: antiquewhite; */
+}
 #nav .dropdown-menu a {
   color: #2c3e50; 
 }
 #nav a.router-link-exact-active {
   /* color: #42b983; */
-  color: blue;
+  color: rgb(247, 98, 14);
 }
 #nav .dropdown-menu a.router-link-exact-active {
   /* color: #42b983; */

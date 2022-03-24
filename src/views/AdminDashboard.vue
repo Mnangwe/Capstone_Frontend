@@ -17,13 +17,13 @@
       <!-- Users-tab -->
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-             <div class="users" v-if="users" >
-              <div class="condainer" v-for="user of users">
+             <div class="row" v-if="users" >
+              <div class="col-xm-12 col-sm-6 col-md-4" v-for="user of users">
                 <div class="card" style="width: 18rem;" >
                   <img :src="user.profile" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <h3 class="card-title">{{user.username}} </h3>
-                    <p class="card-text">{{user.email}}</p>
+                    <p class="card-title">Username: {{user.username}} </p>
+                    <p class="card-text">Email: {{user.email}}</p>
                     <div class="isAdmin">
                       <form @submit.prevent="updateRole(user._id)">
                         <div class="role-admin">
@@ -31,19 +31,22 @@
                           <label v-if="user.isAdmin"> Admin</label>
                           <label v-else> Normal user</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Edit Roles</button>
+                        <div class="card-buttons">
+                          <button type="submit" class="btn btn-primary">Edit Roles</button>
+                          <button type="button" class="btn btn-primary" @click="deleteUser(user._id)">Delete</button>
+                        </div>
                       </form>
                     </div>
-              <div class="card-quantity">
-                {{user.isAdmin}}
-              </div>
-              <button type="button" class="btn btn-primary" @click="deleteUser(user._id)">Delete</button>
+              
               
             </div>
           </div>
         </div>
         
-    </div>
+             </div>
+             <div class="row loader" v-else>
+               <Loader/>
+             </div>
         </div>
         <!-- Products Tabs -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -51,8 +54,8 @@
             <div class="add-product">
               <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addProduct">Add</button>
             </div>
-            <div class="products" v-if="products" >
-              <div class="container" v-for="product of products">
+            <div class="row" v-if="products" >
+              <div class="col-xm-12 col-sm-6 col-md-4r" v-for="product of products">
                 <div class="card" style="width: 18rem;" >
                 <img :src="product.image" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -71,7 +74,10 @@
             </div>
           </div>
         
-    </div>
+            </div>
+            <div class="row" v-else>
+              <Loader/>
+            </div>
         </div>
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
       </div>
@@ -91,9 +97,10 @@
 import Navbar from "@/components/Navbar"
 import AddProduct from "@/components/AddProduct"
 import EditProduct from "@/components/EditProduct"
+import Loader from "@/components/Loader"
 
 export default {
-    components: { Navbar, EditProduct, AddProduct },
+    components: { Navbar, EditProduct, AddProduct, Loader },
     data() {
         return {
             users:null,
@@ -248,6 +255,32 @@ export default {
   background: #eee;
   height: 100vh;
 }
+.loader {
+  padding-top: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tab-content .card-body {
+  text-align: left;
+  padding-left: 12%;
+}
+.card-buttons {
+  display: flex;
+  gap: 3px;
+}
+.nav-link {
+  color: #2c3e50;
+  font-weight: bold;
+}
+.nav-link:hover {
+  color: #2c3e50;
+  transform: scale(1.1);
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: rgb(247, 98, 14);
+}
 .navigate {
     position: relative;
     top: 0;
@@ -263,12 +296,12 @@ export default {
   padding-top: 10px;
   
 }
+
 .add-product {
   display: flex;
   flex-direction: row-reverse;
 }
 .admin .nav {
-  background: #aaa;
   border-radius: 5px;
 }
 .users {

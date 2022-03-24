@@ -31,8 +31,6 @@
             </div>
             <!-- CONTENT -->
             <form @submit.prevent="login" class="modal-body">
-
-              
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <img src="https://i.postimg.cc/VkJLXBdR/logo-2-removebg-preview.png" class="logo-img" alt="">
               <p class="text-secondary mb-5">Please enter your login and password!</p>
@@ -152,7 +150,7 @@ export default {
 </script>
 
 <style>
-  header.home {
+header.home {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 nav {
@@ -169,7 +167,7 @@ nav {
   
  }
  .navbar-logo {
-   flex: 1;
+  flex: 1;
   display: flex;
   justify-content: flex-start;
  }
