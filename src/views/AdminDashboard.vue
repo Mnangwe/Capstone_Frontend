@@ -11,7 +11,7 @@
           <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Products</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+          <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Business Stats</button>
         </li>
       </ul>
       <!-- Users-tab -->
@@ -47,6 +47,10 @@
         </div>
         <!-- Products Tabs -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <h1>Products</h1>
+            <div class="add-product">
+              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addProduct">Add</button>
+            </div>
             <div class="products" v-if="products" >
               <div class="container" v-for="product of products">
                 <div class="card" style="width: 18rem;" >
@@ -59,9 +63,11 @@
                     
                   
                 </div>
-                <button type="button" class="btn btn-primary" @click="deleteProduct(product._id)">Delete</button>
-                <button type="button" class="btn btn-primary" @click="editProduct(product._id)">Edit</button>
-              </div>
+                  <div class="btn-products">
+                    <button type="button" class="btn btn-primary" @click="deleteProduct(product._id)">Delete</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
+                  </div>
+               </div>
             </div>
           </div>
         
@@ -77,14 +83,17 @@
   </section>
    
    
-
-    
+  <AddProduct/>
+  <EditProduct/>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar"
+import AddProduct from "@/components/AddProduct"
+import EditProduct from "@/components/EditProduct"
+
 export default {
-    components: { Navbar },
+    components: { Navbar, EditProduct, AddProduct },
     data() {
         return {
             users:null,
@@ -121,7 +130,7 @@ export default {
           if(localStorage.getItem("jwt")){
             const user = this.users.find(user => user._id === id)
             console.log(user)
-            fetch(`http://localhost:3100/users/${id}/role`, {
+            fetch(`https://capstone-estratweni.herokuapp.com/users/${id}/role`, {
               method: "PUT",
               body: JSON.stringify({
                 isAdmin: user.isAdmin 
@@ -176,53 +185,58 @@ export default {
         }
     },
     mounted() {
-    if (localStorage.getItem("jwt")) {
-      fetch("http://localhost:3100/users", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      if(localStorage.getItem("jwt")){
+        if (JSON.parse(localStorage.getItem("user")).isAdmin) {
+          fetch("https://capstone-estratweni.herokuapp.com/users", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            }
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              this.users = json;
+              this.role = json.isAdmin
+              console.log(json)
+              fetch("https://capstone-estratweni.herokuapp.com/products", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              this.products = json;
+              console.log(this.products)
+              console.log(json)
+              fetch("https://capstone-estratweni.herokuapp.com/income", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              this.income = json;
+              console.log(this.income)
+            })
+            
+            })
+            .catch((err) => {
+              alert("User not logged in");
+            });
+            })
+            }else {
+          alert("You not allowed");
+          this.$router.push({ name: "Products" });
         }
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          this.users = json;
-          this.role = json.isAdmin
-          console.log(json)
-          fetch("http://localhost:3100/products", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          this.products = json;
-          console.log(this.products)
-          console.log(json)
-          fetch("http://localhost:3100/order/income", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          this.income = json;
-          console.log(this.income)
-        })
-        
-        })
-        .catch((err) => {
-          alert("User not logged in");
-        });
-        })
-        }else {
-      alert("User not logged in");
-      this.$router.push({ name: "Home" });
-    }
+      }else {
+          alert("You not logged in");
+          this.$router.push({ name: "Home" });
+        }
   }
 }
 
@@ -249,6 +263,10 @@ export default {
   padding-top: 10px;
   
 }
+.add-product {
+  display: flex;
+  flex-direction: row-reverse;
+}
 .admin .nav {
   background: #aaa;
   border-radius: 5px;
@@ -262,6 +280,11 @@ export default {
     display: flex;
     gap: 4px;
     margin: 5px;
+}
+.btn-products {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3px;
 }
 
 </style>

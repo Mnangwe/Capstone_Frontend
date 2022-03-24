@@ -3,33 +3,49 @@
        <div class="marketing">
          <div class="container">
            <div class="advert">
-             <p>Our Kasi Favourit Spot Don't Miss Out</p>
+             <p>Our Kasi Favourit Spot Don't Miss Out. Zwakala Estratweni</p>
            </div>
          </div>
        </div>
        <header class="bg-dark">
-         <h3>
-         Welcome to e-Stratweni Mobile Foods
-       </h3>
-        <nav id="nav"  :class="{ active: isActive }">
-        <!-- <router-link @click="toggleNav" to="/">Home</router-link> -->
-        <!-- <router-link @click="toggleNav" to="/about">About</router-link> -->
-
-        <router-link @click="toggleNav" :to="{ name: 'Products' }">Products</router-link>
-        
-        <router-link @click="toggleNav" :to="{ name: 'Cart' }">Cart</router-link>
-        <router-link @click="toggleNav" :to="{ name: 'AdminDashboard' }"
-        >Admin</router-link
-        >
-        <router-link @click="logout" class="logout" :to="{ name: 'Home' }"
-        >Log out</router-link
-        >
-        </nav>
-        <button id="nav-btn" @click="toggleNav">
-            <i className="fas fa-bars"></i>
-        </button>
-       </header>
-       
+          <h3>
+          Welcome to e-Stratweni Mobile Foods
+          </h3>
+          <nav class="navbar navbar-expand-lg" id="nav"  :class="{ active: isActive }">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#"><img src="https://i.postimg.cc/VkJLXBdR/logo-2-removebg-preview.png" width="60" height="60" alt=""></a>
+              <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item">          
+                    <router-link class="nav-link active" aria-current="page" @click="toggleNav" :to="{ name: 'Products' }">Products</router-link>
+                  </li>
+                  <li class="nav-item">          
+                    <router-link class="nav-link" @click="toggleNav" :to="{ name: 'Cart' }">Cart</router-link>
+                  </li>
+                  <li class="nav-item">        
+                    <router-link class="nav-link" @click="toggleNav" v-if="user.isAdmin" :to="{ name: 'AdminDashboard' }">Admin</router-link>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Me 
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li>
+                        <router-link class="dropdown-item" :to="{ name: 'Profile' }">Profile</router-link>
+                      </li>
+                      <li>
+                        <router-link class="dropdown-item" @click="logout" :to="{ name: 'Home' }">Log out</router-link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+       </header> 
     </div>
 </template>
 
@@ -38,6 +54,7 @@ export default {
     data() {
     return {
       isActive: false,
+      user: JSON.parse(localStorage.getItem("user"))
     };
   },
   methods: {
@@ -63,16 +80,26 @@ export default {
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-bottom: 5px;
-  color: black;
+  color: white;
+  background: linear-gradient(95deg,#059dff 15%, #6549d5 45%, #e33fa1 75%, #fb5343 100% ) 95%/200% 100%;
 }
+
 header {
   width: 100%;
 }
 .nav h2, .nav nav {
   text-align: left;
 }
-
-
+.marketing {
+  font-weight: bolder;
+}
+.collapse {
+justify-content: center;
+}
+.navbar-brand {
+  position: relative;
+  left: 20%;
+}
 #nav-btn {
   position: fixed;
   top: 20px;
@@ -84,6 +111,11 @@ header {
   border: none;
   outline: none;
   display: none;
+}
+@media screen and (max-width:992px) {
+  .navbar-brand {
+    display: none;
+  }
 }
 @media screen and (max-width: 500px) {
   #nav {

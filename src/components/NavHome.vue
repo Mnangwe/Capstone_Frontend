@@ -122,7 +122,7 @@ export default {
       this.isActive = !this.isActive;
     },
     login() {
-      fetch("http://localhost:3100/users/login", {
+      fetch("https://capstone-estratweni.herokuapp.com/users/login", {
         method: "POST",
         body: JSON.stringify({
           email: this.email,
@@ -133,12 +133,15 @@ export default {
         },
       })
         .then((response) => response.json())
-        .then((json) => {
-          localStorage.setItem("jwt", json.jwt);
-          localStorage.setItem("user", JSON.stringify(json.user));
-          console.log(json.jwt)
+        .then(async (json) => {
+          await localStorage.setItem("jwt", json.jwt);
+          await localStorage.setItem("user", JSON.stringify(json.user));
           alert("User logged in");
-          this.$router.push({ name: "Products" });
+          const user = await  JSON.parse(localStorage.getItem("user"))
+          console.log(json.jwt)
+          
+          if(user.isAdmin) return await this.$router.push({ name: 'AdminDashboard' })
+          else return await this.$router.push({ name: "Products" });
         })
         .catch((err) => {
           alert(err);

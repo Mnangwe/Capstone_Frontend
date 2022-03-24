@@ -12,11 +12,12 @@ export default {
   data() {
   return {
     products: null,
+    user: JSON.parse(localStorage.getItem('user'))
   };
   },
   mounted() {
     if (localStorage.getItem("jwt")) {
-      fetch("http://localhost:3100/cart", {
+      fetch(`https://capstone-estratweni.herokuapp.com/cart/${this.user._id}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

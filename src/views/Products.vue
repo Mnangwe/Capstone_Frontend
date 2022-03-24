@@ -44,7 +44,7 @@ export default {
     return {
       user:JSON.parse(localStorage.getItem("user")),
       products: null,
-      quantity: 1
+      quantity: 1,
     };
   },
   methods: {
@@ -52,7 +52,7 @@ export default {
       if (localStorage.getItem("jwt")) {
       console.log(this.user)
       const product = this.products.find(product => product._id === id)
-      fetch(`http://localhost:3100/cart`, {
+      fetch(`https://capstone-estratweni.herokuapp.com/cart`, {
         method: "POST",
         body: JSON.stringify({
           userId: this.user._id,
@@ -79,7 +79,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("jwt")) {
-      fetch("http://localhost:3100/products", {
+      fetch("https://capstone-estratweni.herokuapp.com/products", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

@@ -32,7 +32,7 @@ export default {
     },
     mounted() {
         if(this.id){
-        fetch("http://localhost:3100/products/" + this.id, {
+        fetch("https://capstone-estratweni.herokuapp.com/products/" + this.id, {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8",
