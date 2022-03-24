@@ -44,7 +44,7 @@ export default {
     return {
       user:JSON.parse(localStorage.getItem("user")),
       products: null,
-      quantity: 1,
+      quantity: 1
     };
   },
   methods: {
