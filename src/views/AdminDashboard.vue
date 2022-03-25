@@ -214,13 +214,14 @@ export default {
             },
           })
             .then((response) => response.json())
-            .then((json) => {
+            .then(async (json) => {
               this.products = json;
+              localStorage.setItem('products', JSON.stringify(json))
               console.log(this.products)
               console.log(json)
-              fetch("https://capstone-estratweni.herokuapp.com/income", {
-            method: "GET",
-            headers: {
+              await fetch("https://capstone-estratweni.herokuapp.com/order/income", {
+              method: "GET",
+              headers: {
               "Content-type": "application/json; charset=UTF-8",
               Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },

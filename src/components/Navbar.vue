@@ -81,7 +81,7 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-bottom: 5px;
   color: white;
-  background: linear-gradient(95deg,#059dff 15%, #6549d5 45%, #e33fa1 75%, #fb5343 100% ) 95%/200% 100%;
+  background: linear-gradient(95deg,#F39848 15%, #EF8256 45%, #CBA17D 75%, #fb5343 100% ) 95%/200% 100%;
 }
 header h3 {
   color: #2c3e50; 
