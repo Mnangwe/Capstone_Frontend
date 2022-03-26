@@ -51,7 +51,7 @@ export default {
         if(this.name || this.categories || this.desc || this.price || this.image){
             const product = this.products.find(user => user._id === id)
             console.log(user)
-            fetch(`http://localhost:3100/products/${id}`, {
+            fetch(`https://capstone-estratweni.herokuapp.com/products/${id}`, {
               method: "PUT",
               body: JSON.stringify({
                 name: this.name,

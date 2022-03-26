@@ -17,46 +17,7 @@
       <!-- Users-tab -->
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-             <!-- <div class="row" v-if="users" >
-              <div class="col-xm-12 col-sm-6 col-md-4" v-for="user of users">
-                <div class="card" style="width: 18rem;" >
-                  <img :src="user.profile" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <p class="card-title">Username: {{user.username}} </p>
-                    <p class="card-text">Email: {{user.email}}</p>
-                    <div class="isAdmin">
-                      <form @submit.prevent="updateRole(user._id)">
-                        <div class="role-admin">
-                          <input type="checkbox" name="" v-model="user.isAdmin">
-                          <label v-if="user.isAdmin"> Admin</label>
-                          <label v-else> Normal user</label>
-                        </div>
-                        <div class="card-buttons">
-                          <button type="submit" class="btn btn-primary">Edit Roles</button>
-                          <button type="button" class="btn btn-primary" @click="deleteUser(user._id)">Delete</button>
-                        </div>
-                      </form>
-                    </div>
-              
-              
-            </div>
-          </div>
-        </div>
-        
-             </div> -->
-             <Users v-if="users" :theData="users" :config="config" :style="{height: '600px'}"/>
-             <!-- <table>
-               <tr>
-                 <th></th>
-                 <th></th>
-                 <th></th>
-                 <th></th>
-                 <th></th>
-               </tr>
-               <tr>
-
-               </tr>
-             </table> -->
+             <Users v-if="users" :theData="users" :configUser="configUser" :style="{height: '600px'}"/>
              <div class="row loader" v-else>
                <Loader/>
              </div>
@@ -67,7 +28,7 @@
             <div class="add-product">
               <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addProduct">Add</button>
             </div>
-            <div class="row" v-if="products" >
+            <!-- <div class="row" v-if="products" >
               <div class="col-xm-12 col-sm-6 col-md-4r" v-for="product of products">
                 <div class="card" style="width: 18rem;" >
                 <img :src="product.image" class="card-img-top" alt="...">
@@ -87,7 +48,9 @@
             </div>
           </div>
         
-            </div>
+            </div> -->
+
+            <Products v-if="products" :theData="products" :configProduct="configProduct" :style="{height: '600px'}"/>
             <div class="row" v-else>
               <Loader/>
             </div>
@@ -112,16 +75,16 @@ import AddProduct from "@/components/AddProduct"
 import EditProduct from "@/components/EditProduct"
 import Loader from "@/components/Loader"
 import Users from "@/components/Users"
+import Products from "@/components/Products"
 
 export default {
-    components: { Navbar, EditProduct, AddProduct, Loader, Users},
+    components: { Navbar, EditProduct, AddProduct, Loader, Users, Products},
     data() {
         return {
             users:null,
             products: null,
             income: null,
-            admin:false,
-            config: [
+            configUser: [
               {
                 key: 'profile',
                 title: 'Profile',
@@ -145,6 +108,33 @@ export default {
               {
                 key: 'createdAt',
                 title: 'Signup Date',
+                type: 'date'
+              }
+            ],
+            configProduct: [
+              {
+                key: 'image',
+                title: 'Image',
+                type: 'image'
+              },
+              {
+                key: 'name',
+                title: 'Name',
+                type: 'text'
+              },
+              {
+                key: 'desc',
+                title: 'Description',
+                type: 'text'
+              },
+              {
+                key: 'price',
+                title: 'Price',
+                type: 'text'
+              },
+              {
+                key: 'createdAt',
+                title: 'Created',
                 type: 'date'
               }
             ]

@@ -3,14 +3,14 @@
         <table>
             <thead>
                 <tr>
-                    <th v-for="(obj, index) in config" :key="index">
+                    <th v-for="(obj, index) in configUser" :key="index">
                         {{ obj.title }}
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(row, index) in theData" :key="index">
-                    <td v-for="(obj, ind) in config" :key="ind">
+                    <td v-for="(obj, ind) in configUser" :key="ind">
                         <span v-if="obj.type === 'text'">{{row[obj.key]}}</span>
                         <span v-if="obj.type === 'date'">{{new Date(row[obj.key]).toLocaleDateString()}} </span>
                         <figure v-if="obj.type === 'image'">
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    props: ['theData', 'config'],
+    props: ['theData', 'configUser'],
     methods: {
         deleteUser(id){
           if(localStorage.getItem("jwt")){
@@ -111,6 +111,9 @@ export default {
     table td {
         padding: 5px 5px;
         text-align: left;
+    }
+    table td:nth-child(4), table td:nth-child(2){
+        font-weight: bold;
     }
     
 </style>

@@ -6,24 +6,27 @@
         <h2>This is Products</h2>
       </div>
       
-      <div class="container" v-if="products"  v-for="product of products">
+      <div class="container products" v-if="products"  >
         <!-- <router-link class="card-wrapper" v-for="product of products" :to="{ name: 'Product', params: { id: product._id } }" :key="product._id"> -->
-          <div class="card" style="width: 18rem;" >
-            <img :src="product.image" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h3 class="card-title">{{product.name}} </h3>
-              <p class="card-text">{{product.desc}}</p>
-              <p class="card-price">R <span>{{product.price}}</span></p>
-              <form class="card-quantity" @submit.prevent="addToCart(product._id)">
-                
-                <input class="quantity" type="number" v-model="quantity" min="1">
-                <i class="fa fa-plus-square"></i>
-                <button type="submit" class="btn btn-primary" >Add to Cart</button>
-              </form>
-             
-              
-            </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-for="product of products">
+              <div class="card " style="width: 18rem;" >
+              <img :src="product.image" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h3 class="card-title">{{product.name}} </h3>
+                <p class="card-text">{{product.desc}}</p>
+                <p class="card-price">R <span>{{product.price}}</span></p>
+                <form class="card-quantity" @submit.prevent="addToCart(product._id)">
+                  <input class="quantity" type="number" v-model="quantity" min="1">
+                  <i class="fa fa-plus-square"></i>
+                  <button type="submit" class="btn btn-primary" >Add to Cart</button>
+                </form>
+                </div>
+              </div>
+              </div>
           </div>
+          
+          
         <!-- </router-link> -->
       </div>
 
@@ -115,16 +118,23 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .card {
   padding: 0;
-}
-.card-body {
-  /* text-align: justify; */
+
 }
 .card img {
   width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
+.card-body {
+  height: 275px;
+}
+.card-body .card-text {
+  height: 100px;
+}
+
 .card .card-title {
   font-weight: bold;
   color: #333;

@@ -3,14 +3,14 @@
         <table>
             <thead>
                 <tr>
-                    <th v-for="(obj, index) in config" :key="index">
+                    <th v-for="(obj, index) in configProduct" :key="index">
                         {{ obj.title }}
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(row, index) in theData" :key="index">
-                    <td v-for="(obj, ind) in config" :key="ind">
+                    <td v-for="(obj, ind) in configProduct" :key="ind">
                         <span v-if="obj.type === 'text'">{{row[obj.key]}}</span>
                         <span v-if="obj.type === 'date'">{{new Date(row[obj.key]).toLocaleDateString()}} </span>
                         <figure v-if="obj.type === 'image'">
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    props: ['theData', 'config'],
+    props: ['theData', 'configProduct'],
     methods: {
         deleteProduct(id){
           if(localStorage.getItem("jwt")){
@@ -43,17 +43,16 @@ export default {
                 headers: {
                   "Content-type": "application/json; charset=UTF-8",
                   Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                    }
+                }).then(res => res.json())
+                .then(async data => {
+                    await console.log(data)
+                    await console.log(data.msg)
+                    location.reload()
+                })
                 }
-            }).then(res => res.json())
-              .then(async data => {
-                await console.log(data)
-                await console.log(data.msg)
-                location.reload()
-              }).catch((err) => {
-                alert(err);
+            
             }
-              
-          }
         },
         editProduct(id){
           if(localStorage.getItem("jwt")){
@@ -66,7 +65,7 @@ export default {
                     name: product.name,
                     categories: product.categories,
                     desc: product.desc,
-                    price: product.price
+                    price: parseInt(product.price)
                 }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
@@ -76,8 +75,7 @@ export default {
                 .then(data => {
                     console.log(data)
                     alert("Your successfully edited")
-                }).catch((err) => {
-                alert(err);
+                })
             }
           }
         }
@@ -87,5 +85,50 @@ export default {
 </script>
 
 <style scoped>
-
+    figure img {
+        height: 60px;
+        width: 60px;
+        border: 1px solid #bbb;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .awesome-table {
+    border: 1px solid #999;
+    border-radius: 4px;
+    color: #333;
+    overflow: auto;
+    margin-top: 30px;
+    }
+    figure {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    table th {
+        position: sticky;
+        top: 0;
+        background: #aaa;
+        padding: 10px 5px;
+        text-align: left;
+        border-bottom: 1px solid #999;
+    }
+    table td {
+        padding: 5px 5px;
+        text-align: left;
+    }
+    table td:nth-child(3){
+        width: 45%;
+        margin-right: 5px;
+    }
+    table td:nth-child(4){
+        font-weight: bold;
+    }
+    table td:nth-child(2){
+        font-weight: bold;
+    }
 </style>
