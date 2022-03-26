@@ -7,16 +7,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form @submit.prevent="editProfile()" class="modal-body">
-        <input v-model="name" type="text">
-        <input v-model="tempCategories" type="text">
-        <input v-model="desc" type="text">
-        <input v-model="price" type="text">
-        <input v-model="image" type="text">
+        <input v-model="username" type="text" placeholder="username">
+        <input v-model="email" type="text" Email...>
+        <input v-model="profile" type="text" placeholder="profile picture">
+        <input v-model="cover" type="text" placeholder="profile photo">
+        <input v-model="password" type="text" password>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Edit</button>
       </form>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -24,7 +22,15 @@
 
 <script>
 export default {
-
+    methods: {
+        editProfile(){
+        if (localStorage.getItem("jwt")){
+            
+            
+            }
+        }
+        
+    }
 }
 </script>
 

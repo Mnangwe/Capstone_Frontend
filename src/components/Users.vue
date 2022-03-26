@@ -17,7 +17,12 @@
                             <img :src="row[obj.key]" height="60px">
                         </figure>
                         <div class="card-buttons">
-                            <button v-if="obj.type === 'image'" type="submit" class="btn btn-primary">Edit Roles</button>
+                          <form action="" v-if="obj.type === 'image'" @submit.prevent="updateRole(row._id)">
+                            
+                            <button  type="submit" class="btn btn-primary">Edit Roles</button>
+                            <input type="checkbox" class="che">
+                          </form>
+                            
                             <button v-if="obj.type === 'image'" type="button" class="btn btn-primary" @click="deleteUser(row._id)">Delete</button>
                         </div>
                     </td>
