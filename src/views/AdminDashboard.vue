@@ -17,7 +17,7 @@
       <!-- Users-tab -->
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-             <div class="row" v-if="users" >
+             <!-- <div class="row" v-if="users" >
               <div class="col-xm-12 col-sm-6 col-md-4" v-for="user of users">
                 <div class="card" style="width: 18rem;" >
                   <img :src="user.profile" class="card-img-top" alt="...">
@@ -43,7 +43,20 @@
           </div>
         </div>
         
-             </div>
+             </div> -->
+             <Users v-if="users" :theData="users" :config="config" :style="{height: '600px'}"/>
+             <!-- <table>
+               <tr>
+                 <th></th>
+                 <th></th>
+                 <th></th>
+                 <th></th>
+                 <th></th>
+               </tr>
+               <tr>
+
+               </tr>
+             </table> -->
              <div class="row loader" v-else>
                <Loader/>
              </div>
@@ -98,97 +111,44 @@ import Navbar from "@/components/Navbar"
 import AddProduct from "@/components/AddProduct"
 import EditProduct from "@/components/EditProduct"
 import Loader from "@/components/Loader"
+import Users from "@/components/Users"
 
 export default {
-    components: { Navbar, EditProduct, AddProduct, Loader },
+    components: { Navbar, EditProduct, AddProduct, Loader, Users},
     data() {
         return {
             users:null,
             products: null,
             income: null,
-            admin:false
-        }
-    },
-    methods: {
-        deleteUser(id){
-          if(localStorage.getItem("jwt")){
-            let confirmation = confirm(
-            `Are you sure you want to remove this user from the list?`
-            );
-
-            if (confirmation) {
-              fetch(`http://localhost:3100/users/${id}/user`, {
-                method: "DELETE",
-                headers: {
-                  "Content-type": "application/json; charset=UTF-8",
-                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-                }
-            }).then(res => res.json())
-              .then(async data => {
-                await console.log(data)
-                await console.log(data.msg)
-                location.reload()
-              })
-            }
-              
-          }
-        },
-        updateRole(id){
-          if(localStorage.getItem("jwt")){
-            const user = this.users.find(user => user._id === id)
-            console.log(user)
-            fetch(`https://capstone-estratweni.herokuapp.com/users/${id}/role`, {
-              method: "PUT",
-              body: JSON.stringify({
-                isAdmin: user.isAdmin 
-              }),
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            admin:false,
+            config: [
+              {
+                key: 'profile',
+                title: 'Profile',
+                type: 'image'
+              },
+              {
+                key: 'username',
+                title: 'Name',
+                type: 'text'
+              },
+              {
+                key: 'email',
+                title: 'Email',
+                type: 'text'
+              },
+              {
+                key: 'isAdmin',
+                title: 'Admin',
+                type: 'text'
+              },
+              {
+                key: 'createdAt',
+                title: 'Signup Date',
+                type: 'date'
               }
-            }).then(res => res.json())
-              .then(data => console.log(data))
-          }
-        },
-        deleteProduct(id){
-          if(localStorage.getItem("jwt")){
-            let confirmation = confirm(
-            `Are you sure you want to remove this user from the list?`
-            );
-
-            if (confirmation) {
-              fetch(`http://localhost:3100/products/${id}`, {
-                method: "DELETE",
-                headers: {
-                  "Content-type": "application/json; charset=UTF-8",
-                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-                }
-            }).then(res => res.json())
-              .then(async data => {
-                await console.log(data)
-                await console.log(data.msg)
-                location.reload()
-              })
-            }
-              
-          }
-        },
-        editProduct(id){
-          if(localStorage.getItem("jwt")){
-            const product = this.products.find(user => user._id === id)
-            console.log(user)
-            fetch(`http://localhost:3100/users/${id}/role`, {
-              method: "PUT",
-              body: JSON.stringify({
-                
-              }),
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-              }
-            }).then(res => res.json())
-              .then(data => console.log(data))
-          }
+            ]
+  
         }
     },
     mounted() {
