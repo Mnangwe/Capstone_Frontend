@@ -17,24 +17,26 @@
                             <img :src="row[obj.key]" height="60px">
                         </figure>
                         <div class="card-buttons">
-                            <button v-if="obj.type === 'image'" type="submit" class="btn btn-primary">Edit Roles</button>
+                            <button v-if="obj.type === 'image'" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct">Edit Product</button>
                             <button v-if="obj.type === 'image'" type="button" class="btn btn-primary" @click="deleteProduct(row._id)">Delete</button>
                         </div>
                     </td>
                 </tr>
             </tbody>
-        </table>
+        </table> 
     </section>
 </template>
 
 <script>
+
 export default {
+    components: {},
     props: ['theData', 'configProduct'],
     methods: {
         deleteProduct(id){
           if(localStorage.getItem("jwt")){
             let confirmation = confirm(
-            `Are you sure you want to remove this user from the list?`
+            `Are you sure you want to remove this product from the list?`
             );
 
             if (confirmation) {
@@ -47,38 +49,13 @@ export default {
                 }).then(res => res.json())
                 .then(async data => {
                     await console.log(data)
-                    await console.log(data.msg)
+                    await alert(data.msg)
                     location.reload()
                 })
                 }
             
             }
         },
-        editProduct(id){
-          if(localStorage.getItem("jwt")){
-            const product = this.products.find(product => product._id === id)
-            console.log(product)
-            if(product.name || product.categories || product.desc || product.price){
-                fetch(`https://capstone-estratweni.herokuapp.com/products/${id}/role`, {
-                method: "PUT",
-                body: JSON.stringify({
-                    name: product.name,
-                    categories: product.categories,
-                    desc: product.desc,
-                    price: parseInt(product.price)
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-                }
-                }).then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    alert("Your successfully edited")
-                })
-            }
-          }
-        }
     },
     
 }

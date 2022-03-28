@@ -9,12 +9,13 @@
         <h5 class="modal-title" id="editProductLabel">Edit Product</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form @submit.prevent="editProduct()" class="modal-body">
-        <input v-model="name" type="text">
-        <input v-model="tempCategories" type="text">
-        <input v-model="desc" type="text">
-        <input v-model="price" type="text">
-        <input v-model="image" type="text">
+      <form @submit.prevent="editProduct" class="modal-body">
+        <input v-model="name" type="text" placeholder="product name">
+        <input v-model="tempCategories" type="text" placeholder="chicken, burger">
+        <input v-model="desc" type="text" placeholder="description">
+        <input v-model="price" type="text" placeholder="price">
+        <input v-model="image" type="text" placeholder="https://www.image.jpeg.com">
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -27,6 +28,7 @@
 
 <script>
 export default {
+  props: ['theData'],
   data(){
     return{
       name:null,
@@ -46,12 +48,12 @@ export default {
         
       }
     },
-    editProduct(id){
+    editProduct(){
       if(localStorage.getItem("jwt")){
         if(this.name || this.categories || this.desc || this.price || this.image){
-            const product = this.products.find(user => user._id === id)
-            console.log(user)
-            fetch(`https://capstone-estratweni.herokuapp.com/products/${id}`, {
+            const product = this.theData.find(product => product._id === id)
+            console.log(product)
+            fetch(`https://capstone-estratweni.herokuapp.com/products/${product._id}`, {
               method: "PUT",
               body: JSON.stringify({
                 name: this.name,
@@ -65,7 +67,10 @@ export default {
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`,
               }
             }).then(res => res.json())
-              .then(data => console.log(data))
+              .then(data => {
+                console.log(data)
+                alert(data.msg)
+                })
           }
       }
     }

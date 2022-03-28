@@ -18,9 +18,8 @@
                         </figure>
                         <div class="card-buttons">
                           <form action="" v-if="obj.type === 'image'" @submit.prevent="updateRole(row._id)">
-                            
                             <button  type="submit" class="btn btn-primary">Edit Roles</button>
-                            <input type="checkbox" class="che">
+                            <input type="checkbox" v-model="row.isAdmin" class="che">
                           </form>
                             
                             <button v-if="obj.type === 'image'" type="button" class="btn btn-primary" @click="deleteUser(row._id)">Delete</button>
@@ -43,7 +42,7 @@ export default {
             );
 
             if (confirmation) {
-              fetch(`https://capstone-estratweni.herokuapp.com/${id}/user`, {
+              fetch(`https://capstone-estratweni.herokuapp.com/users/${id}/user`, {
                 method: "DELETE",
                 headers: {
                   "Content-type": "application/json; charset=UTF-8",
@@ -52,29 +51,31 @@ export default {
             }).then(res => res.json())
               .then(async data => {
                 await console.log(data)
-                await console.log(data.msg)
+                await alert(data.msg)
                 await location.reload()
               })
             }
               
           }
         },
-        updateRole(id){
+        async updateRole(id){
           if(localStorage.getItem("jwt")){
-            const user = this.users.find(user => user._id === id)
-            console.log(user)
-            fetch(`https://capstone-estratweni.herokuapp.com/users/${id}/role`, {
-              method: "PUT",
-              body: JSON.stringify({
-                isAdmin: user.isAdmin 
-              }),
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-              }
-            }).then(res => res.json())
-              .then(data => console.log(data))
-          }
+            const user = this.theData.find(user => user._id === id)
+            await console.log(user)
+            await fetch(`https://capstone-estratweni.herokuapp.com/users/${id}/role`, {
+                method: "PUT",
+                body: JSON.stringify({
+                  isAdmin: user.isAdmin 
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                }
+              }).then(res => res.json())
+                .then(data => {
+                  alert("User updated the role of a user")
+                  console.log(data)})
+            }
         },
     }
 }

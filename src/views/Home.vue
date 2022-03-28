@@ -15,7 +15,7 @@
             <p class="hero-context text-secondary">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. A, quidem nostrum odit ut, voluptas dolorum assumenda vitae dignissimos in sequi beatae possimus. Quod, nihil? Tempora numquam, quisquam dignissimos recusandae magni impedit, officia voluptate nam magnam sed, facere repellendus. Vero, perferendis. Architecto deleniti tempore commodi pariatur, dicta consequatur culpa dolorum recusandae!
             </p>
-            <button class="btn btn-secondary call-action" type="button">
+            <button class="btn btn-secondary call-action" type="button" data-bs-toggle="modal" data-bs-target="#SignUp">
               Book Now
             </button>
           </div>
@@ -24,7 +24,8 @@
 
     </div>
   </section>
-
+  <Login/>
+  <Signup/>
   <Events/>
 </template>
 
@@ -32,12 +33,16 @@
 // @ is an alias to /src
 import NavHome from '@/components/NavHome.vue'
 import Events from '@/components/Events.vue'
+import Login from '@/components/LoginModal.vue'
+import Signup from '@/components/SignUpModal.vue'
 
 export default {
   name: 'Home',
   components: {
     NavHome,
-    Events
+    Events,
+    Login,
+    Signup
   }
 }
 </script>

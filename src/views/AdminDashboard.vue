@@ -58,27 +58,24 @@
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
       </div>
     </div>
-    <!-- <div class="navigate">
-        <button type="button" class="btn btn-primary" @click="findProducts">Products</button>
-        <button type="button" class="btn btn-secondary" @click="findUsers">Users</button>
-    </div> -->
+    
   </section>
    
    
   <AddProduct/>
-  <EditProduct/>
+  <EditModal v-if="products" :theData="products"/>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar"
 import AddProduct from "@/components/AddProduct"
-import EditProduct from "@/components/EditProduct"
+import EditModal from "@/components/EditProduct.vue"
 import Loader from "@/components/Loader"
 import Users from "@/components/Users"
 import Products from "@/components/Products"
 
 export default {
-    components: { Navbar, EditProduct, AddProduct, Loader, Users, Products},
+    components: { Navbar, EditModal , AddProduct, Loader, Users, Products},
     data() {
         return {
             users:null,

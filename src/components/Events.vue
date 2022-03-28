@@ -3,7 +3,7 @@
     <div class="container">
       <div class="timeline-events">
         <!-- First Event -->
-        <div class="event-1">
+        <div class="event-1 btn" data-bs-toggle="modal" data-bs-target="#SignUp">
           <div class="container">
             <div class="card-wrapper">
                 <div class="card card-1">
@@ -14,14 +14,14 @@
                  <div class="card-body-1">
                     <h3 class="card-title text-center">The Fast Dilivery <span class="card-1">Foods</span></h3>
                     <p class="card-text">Our number one Job is to make sure we fill your tummy with our delicious food. Catch it while it still hot</p>
-                    <a href="#" class="btn delivery rounded-pill px-5 my-2">Get Started</a>
+                    <a href="#" class="btn delivery rounded-pill px-5 my-2" data-bs-toggle="modal" data-bs-target="#SignUp">Get Started</a>
                   </div>
                 </div>
             </div>
           </div>
         </div>
         <!-- Secont Event -->
-         <div class="event-2">
+         <div class="event-2 btn" data-bs-toggle="modal" data-bs-target="#SignUp">
            <div class="container">
              <div class="card-wrapper">
                <div class="card card-2 p-3">
@@ -101,7 +101,7 @@
            </div>
          </div>
         <!-- Third Event -->
-        <div class="event-3"> 
+        <div class="event-3 btn" data-bs-toggle="modal" data-bs-target="#SignUp"> 
           <div class="container">
             <div class="card-wrapper">
               <div class="card">
@@ -109,7 +109,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SignUp">Go somewhere</a>
                   </div>
                 </div>
             </div>
