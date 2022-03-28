@@ -9,7 +9,7 @@
         <h5 class="modal-title" id="editProductLabel">Edit Product</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form @submit.prevent="editProduct" class="modal-body">
+      <form @submit.prevent="editProduct(id)" class="modal-body">
         <input v-model="name" type="text" placeholder="product name">
         <input v-model="tempCategories" type="text" placeholder="chicken, burger">
         <input v-model="desc" type="text" placeholder="description">
@@ -18,7 +18,7 @@
         <button type="submit" class="btn btn-primary">Save changes</button>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  props: ['theData'],
+  props: ['id'],
   data(){
     return{
       name:null,
@@ -50,10 +50,8 @@ export default {
     },
     editProduct(){
       if(localStorage.getItem("jwt")){
-        if(this.name || this.categories || this.desc || this.price || this.image){
-            const product = this.theData.find(product => product._id === id)
-            console.log(product)
-            fetch(`https://capstone-estratweni.herokuapp.com/products/${product._id}`, {
+            console.log("We are here")
+            fetch(`https://capstone-estratweni.herokuapp.com/products/${this.id}`, {
               method: "PUT",
               body: JSON.stringify({
                 name: this.name,
@@ -71,7 +69,7 @@ export default {
                 console.log(data)
                 alert(data.msg)
                 })
-          }
+          
       }
     }
   }
