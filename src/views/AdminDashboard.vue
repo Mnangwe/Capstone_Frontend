@@ -60,10 +60,6 @@
     </div>
     
   </section>
-   
-   
-  <AddProduct/>
-  <EditModal v-if="products" :theData="products"/>
 </template>
 
 <script>
@@ -198,7 +194,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .admin-dashboard {
   background: #eee;
   height: 100vh;

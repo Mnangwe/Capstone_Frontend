@@ -1,4 +1,6 @@
 <template>
+    
+    
     <section class="awesome-table">
         <table>
             <thead>
@@ -17,7 +19,8 @@
                             <img :src="row[obj.key]" height="60px">
                         </figure>
                         <div class="card-buttons">
-                            <button v-if="obj.type === 'image'" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct" @click="getProduct(row._id)">Edit Product</button>
+                            
+                            <button v-if="obj.type === 'image'" type="submit" class="btn btn-primary">Edit Product</button>
                             <button v-if="obj.type === 'image'" type="button" class="btn btn-primary" @click="deleteProduct(row._id)">Delete</button>
                         </div>
                     </td>
@@ -29,16 +32,16 @@
 </template>
 
 <script>
-
+ 
 export default {
     
     components: {},
     props: ['theData', 'configProduct'],
-    // props: {
-    //     row: Object,
-    //     configProduct: Object,
-    //     getProduct:Function
-    // },
+    data(){
+        return{
+            editing: false
+        }
+    },
     methods: {
         deleteProduct(id){
           if(localStorage.getItem("jwt")){
@@ -65,10 +68,7 @@ export default {
         },
        
     },
-    mounted(){
-        console.log(this.theData)
-        console.log(this.configProduct)
-    }
+    
     
 }
 </script>

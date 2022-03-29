@@ -18,11 +18,12 @@
                         </figure>
                         <div class="card-buttons">
                           <form action="" v-if="obj.type === 'image'" @submit.prevent="updateRole(row._id)">
+                            <button v-if="obj.type === 'image'" type="button" class="btn btn-danger" @click="deleteUser(row._id)">Delete</button>
                             <button  type="submit" class="btn btn-primary">Edit Roles</button>
                             <input type="checkbox" v-model="row.isAdmin" class="che">
                           </form>
                             
-                            <button v-if="obj.type === 'image'" type="button" class="btn btn-primary" @click="deleteUser(row._id)">Delete</button>
+                            
                         </div>
                     </td>
                 </tr>
@@ -121,5 +122,11 @@ export default {
     table td:nth-child(4), table td:nth-child(2){
         font-weight: bold;
     }
-    
+    form {
+      display: flex;
+      gap: 2px;
+    }
+    form input{
+      padding-top: 2px;
+    }
 </style>

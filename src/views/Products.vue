@@ -6,7 +6,7 @@
         <h2>This is Products</h2>
       </div>
       
-      <div class="container products" v-if="products"  >
+      <div class="container products" v-if="products">
         <!-- <router-link class="card-wrapper" v-for="product of products" :to="{ name: 'Product', params: { id: product._id } }" :key="product._id"> -->
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-for="product of products">
@@ -17,7 +17,7 @@
                 <p class="card-text">{{product.desc}}</p>
                 <p class="card-price">R <span>{{product.price}}</span></p>
                 <form class="card-quantity" @submit.prevent="addToCart(product._id)">
-                  <input class="quantity" type="number" v-model="quantity" min="1">
+                  <input class="quantity" type="number" v-model="product.quantity" min="1">
                   <i class="fa fa-plus-square"></i>
                   <button type="submit" class="btn btn-primary" >Add to Cart</button>
                 </form>
@@ -47,7 +47,7 @@ export default {
     return {
       user:JSON.parse(localStorage.getItem("user")),
       products: null,
-      quantity: 1,
+      // quantity: 1,
     };
   },
   methods: {
@@ -55,7 +55,7 @@ export default {
       if (localStorage.getItem("jwt")) {
       console.log(this.user)
       const product = this.products.find(product => product._id === id)
-      fetch(`https://capstone-estratweni.herokuapp.com/cart`, {
+      fetch(`https://capstone-estratweni.herokuapp.com/cart/`, {
         method: "POST",
         body: JSON.stringify({
           userId: this.user._id,
