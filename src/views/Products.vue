@@ -45,7 +45,7 @@ export default {
   components: { Navbar },
   data() {
     return {
-      user:JSON.parse(localStorage.getItem("user")),
+      user:null,
       products: null,
       // quantity: 1,
     };
@@ -53,9 +53,9 @@ export default {
   methods: {
     addToCart(id){
       if (localStorage.getItem("jwt")) {
-      console.log(this.user)
+      this.user = JSON.parse(localStorage.getItem("user"))
       const product = this.products.find(product => product._id === id)
-      fetch(`https://capstone-estratweni.herokuapp.com/cart/`, {
+      fetch(`https://capstone-estratweni.herokuapp.com/cart/${id}`, {
         method: "POST",
         body: JSON.stringify({
           userId: this.user._id,
@@ -74,7 +74,6 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
-          console.log(user)
           console.log("He is here")
         })
     }

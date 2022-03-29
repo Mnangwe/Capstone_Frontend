@@ -3,25 +3,25 @@
   <div class="container products" v-if="cart"  >
         <!-- <router-link class="card-wrapper" v-for="product of products" :to="{ name: 'Product', params: { id: product._id } }" :key="product._id"> -->
         <div class="row" v-if="cart">
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-for="cart in cart.products">
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-for="product in cart.products">
               <div class="card " style="width: 18rem;" >
-              <!-- <img :src="product.image" class="card-img-top" alt="..."> -->
+               <img :src="product.image" class="card-img-top" alt="...">
               <div class="card-body">
-                <h3 class="card-title">{{item.name }} </h3>
-                <!-- <p class="card-text">{{product.desc}}</p> -->
-                <!-- <p class="card-price">R <span>{{product.price}}</span></p>
+                <h3 class="card-title">{{product.name}} </h3>
+                <p class="card-text">{{product.desc}}</p> 
+                <p class="card-price">R <span>{{product.price}}</span></p>
                 <form class="card-quantity" @submit.prevent="addToCart(product._id)">
                   <input class="quantity" type="number" v-model="product.quantity" min="1">
                   <i class="fa fa-plus-square"></i>
-                  <button type="submit" class="btn btn-primary" >Add to Cart</button>
-                </form> -->
+                  <button type="submit" class="btn btn-primary" >Update quantity</button>
+                </form> 
                 </div>
               </div>
               </div>
           </div>
           
           
-        <!-- </router-link> -->
+        <!-- </router-link>  -->
       </div>
 </template>
 
@@ -32,10 +32,10 @@ export default {
     Navbar
   },
   data() {
-  return {
-    user: JSON.parse(localStorage.getItem('user')),
-    cart: null
-  };
+    return {
+      user: JSON.parse(localStorage.getItem('user')),
+      cart: null
+    };
   },
   mounted() {
     if (localStorage.getItem("jwt")) {
@@ -49,8 +49,7 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           console.log(json)
-          this.cart = json.products
-          console.log(this.cart)
+          this.cart = json
         }).catch((err) => {
           alert("User not logged in");
         });
