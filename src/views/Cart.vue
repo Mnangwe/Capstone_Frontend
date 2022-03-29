@@ -37,6 +37,11 @@ export default {
       cart: null
     };
   },
+  methods: {
+    updateQuantity(id){
+      
+    }
+  },
   mounted() {
     if (localStorage.getItem("jwt")) {
       fetch(`https://capstone-estratweni.herokuapp.com/cart/${this.user._id}`, {
