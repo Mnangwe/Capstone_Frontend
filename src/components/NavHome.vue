@@ -40,64 +40,64 @@ export default {
       isActive: false,
     };
   },
-  methods: {
-    toggleNav() {
-      this.isActive = !this.isActive;
-    },
-    login() {
-      fetch("https://capstone-estratweni.herokuapp.com/users/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: this.email,
-          password: this.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then(async (json) => {
-          await localStorage.setItem("jwt", json.jwt);
-          await localStorage.setItem("user", JSON.stringify(json.user));
-          alert("User logged in");
-          const user = await  JSON.parse(localStorage.getItem("user"))
-          console.log(json.jwt)
+  // methods: {
+  //   toggleNav() {
+  //     this.isActive = !this.isActive;
+  //   },
+  //   login() {
+  //     fetch("https://capstone-estratweni.herokuapp.com/users/login", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         email: this.email,
+  //         password: this.password,
+  //       }),
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then(async (json) => {
+  //         await localStorage.setItem("jwt", json.jwt);
+  //         await localStorage.setItem("user", JSON.stringify(json.user));
+  //         alert("User logged in");
+  //         const user = await  JSON.parse(localStorage.getItem("user"))
+  //         console.log(json.jwt)
           
-          if(user.isAdmin) return await this.$router.push({ name: 'AdminDashboard' })
-          else return await this.$router.push({ name: "Products" });
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    },
-    register() {
-      fetch("https://capstone-estratweni.herokuapp.com/users/login", {
-        method: "POST",
-        body: JSON.stringify({
-          username: this.username,
-          email: this.email,
-          password: this.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then(async (json) => {
-          await localStorage.setItem("jwt", json.jwt);
-          await localStorage.setItem("user", JSON.stringify(json.user));
-          alert("User logged in");
-          const user = await  JSON.parse(localStorage.getItem("user"))
-          console.log(json.jwt)
+  //         if(user.isAdmin) return await this.$router.push({ name: 'AdminDashboard' })
+  //         else return await this.$router.push({ name: "Products" });
+  //       })
+  //       .catch((err) => {
+  //         alert(err);
+  //       });
+  //   },
+  //   register() {
+  //     fetch("https://capstone-estratweni.herokuapp.com/users/", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         username: this.username,
+  //         email: this.email,
+  //         password: this.password,
+  //       }),
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then(async (json) => {
+  //         await localStorage.setItem("jwt", json.jwt);
+  //         await localStorage.setItem("user", JSON.stringify(json.user));
+  //         alert("User logged in");
+  //         const user = await  JSON.parse(localStorage.getItem("user"))
+  //         console.log(json.jwt)
           
-          if(user.isAdmin) return await this.$router.push({ name: 'AdminDashboard' })
-          else return await this.$router.push({ name: "Products" });
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    },
-  },
+  //         if(user.isAdmin) return await this.$router.push({ name: 'AdminDashboard' })
+  //         else return await this.$router.push({ name: "Products" });
+  //       })
+  //       .catch((err) => {
+  //         alert(err);
+  //       });
+  //   },
+  // },
 }
 </script>
 

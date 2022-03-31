@@ -92,23 +92,12 @@ export default {
         .then((json) => {
           this.products = json;
           console.log(json)
-          
-        //   fetch("http://localhost:3100/users/", {
-        //   method: "GET",
-        //   headers: {
-        //     "Content-type": "application/json; charset=UTF-8",
-        //     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        //   },
-        // }).then(res => res.json())
-        // .then(data => {
-        //     this.users = data
-        //     console.log(data)
-            
-        //     })
+          console.log("We here")
+        
         }).catch((err) => {
           alert("User not logged in");
         });
-    } else {
+    }else {
       alert("User not logged in");
       this.$router.push({ name: "Home" });
     }

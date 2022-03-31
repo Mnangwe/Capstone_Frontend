@@ -70,7 +70,7 @@ export default {
         .then((response) => response.json())
         .then(async (json) => {
           await localStorage.setItem("jwt", json.jwt);
-          await localStorage.setItem("user", JSON.stringify(json.user));
+          await localStorage.setItem("user", JSON.stringify(json.newUser));
           alert("Welcome to eStratweni family");
           const user = await  JSON.parse(localStorage.getItem("user"))
           console.log(json.jwt)         

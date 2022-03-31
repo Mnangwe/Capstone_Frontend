@@ -68,6 +68,7 @@ export default {
         .then(async (json) => {
           await localStorage.setItem("jwt", json.jwt);
           await localStorage.setItem("user", JSON.stringify(json.user));
+          await localStorage.setItem("password", JSON.stringify(this.password));
           alert("User logged in");
           const user = await  JSON.parse(localStorage.getItem("user"))
           console.log(json.jwt)

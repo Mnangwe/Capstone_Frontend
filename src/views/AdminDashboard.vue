@@ -28,27 +28,7 @@
             <div class="add-product">
               <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addProduct">Add</button>
             </div>
-            <!-- <div class="row" v-if="products" >
-              <div class="col-xm-12 col-sm-6 col-md-4r" v-for="product of products">
-                <div class="card" style="width: 18rem;" >
-                <img :src="product.image" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h3 class="card-title">{{product.name}} </h3>
-                  <p class="card-text">{{product.desc}}</p>
-                  <p class="card-price">R <span>{{product.price}}</span></p>
-                  <div class="card-quantity">
-                    
-                  
-                </div>
-                  <div class="btn-products">
-                    <button type="button" class="btn btn-primary" @click="deleteProduct(product._id)">Delete</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
-                  </div>
-               </div>
-            </div>
-          </div>
-        
-            </div> -->
+            
 
             <Products v-if="products" :theData="products" :configProduct="configProduct" :style="{height: '600px'}"/>
             <div class="row" v-else>

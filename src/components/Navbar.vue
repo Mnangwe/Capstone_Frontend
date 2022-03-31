@@ -25,7 +25,7 @@
                   <li class="nav-item">          
                     <router-link class="nav-link" @click="toggleNav" :to="{ name: 'Cart' }">Cart</router-link>
                   </li>
-                  <li class="nav-item">        
+                  <li class="nav-item" v-if="user">        
                     <router-link class="nav-link" @click="toggleNav" v-if="user.isAdmin" :to="{ name: 'AdminDashboard' }">Admin</router-link>
                   </li>
                   <li class="nav-item dropdown">
@@ -54,9 +54,22 @@ export default {
     data() {
     return {
       isActive: false,
-      user: JSON.parse(localStorage.getItem("user"))
+      user: JSON.parse(localStorage.getItem("user")),
     };
   },
+  updated(){
+      if (localStorage.getItem("jwt")) {
+        location.reload()
+        if(localStorage.getItem("user")){
+          this.user = JSON.parse(localStorage.getItem("user"))
+          console.log(this.user)
+        }else if(localStorage.getItem("newUser")){
+          this.user = JSON.parse(localStorage.getItem("newUser"))
+          console.log(this.user)
+        }
+      }
+    }
+    ,
   methods: {
     toggleNav() {
       this.isActive = !this.isActive;

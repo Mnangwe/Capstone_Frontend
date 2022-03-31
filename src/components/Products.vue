@@ -1,6 +1,7 @@
 <template>
     
-    
+    <AddProduct/>
+    <EditProduct v-for="(row, index) in theData" :key="index" :product="row"/>
     <section class="awesome-table">
         <table>
             <thead>
@@ -12,17 +13,20 @@
             </thead>
                 <tbody>
                 <tr v-for="(row, index) in theData" :key="index">
+                    
                     <td v-for="(obj, ind) in configProduct" :key="ind">
                         <span v-if="obj.type === 'text'">{{row[obj.key]}}</span>
                         <span v-if="obj.type === 'date'">{{new Date(row[obj.key]).toLocaleDateString()}} </span>
                         <figure v-if="obj.type === 'image'">
                             <img :src="row[obj.key]" height="60px">
                         </figure>
+                       
                         <div class="card-buttons">
-                            
-                            <button v-if="obj.type === 'image'" type="submit" class="btn btn-primary">Edit Product</button>
-                            <button v-if="obj.type === 'image'" type="button" class="btn btn-primary" @click="deleteProduct(row._id)">Delete</button>
+                            <button v-if="obj.type === 'image'" type="submit" class="btn btn-primary btn-product" data-bs-toggle="modal" data-bs-target="#editProduct">Edit Product</button>
+                            <button v-if="obj.type === 'image'" type="button" class="btn btn-danger" @click="deleteProduct(row._id)">Delete</button>
                         </div>
+                        
+                        
                     </td>
                 </tr>
             </tbody>
@@ -32,10 +36,11 @@
 </template>
 
 <script>
- 
+import AddProduct from "./AddProduct.vue"
+import EditProduct from "./EditProduct.vue"
 export default {
     
-    components: {},
+    components: { AddProduct, EditProduct },
     props: ['theData', 'configProduct'],
     data(){
         return{
@@ -66,6 +71,25 @@ export default {
             
             }
         },
+        editProduct(id){
+            if(localStorage.getItem("jwt")){
+                fetch(`https://capstone-estratweni.herokuapp.com/products/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        id: 1,
+                        title: 'foo',
+                        body: 'bar',
+                        userId: 1,
+                    }),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                    },
+                    })
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+            }
+        }
        
     },
     
@@ -87,6 +111,7 @@ figure {
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
+
 figure img {
   height: 60px;
   width: 60px;
@@ -156,5 +181,11 @@ table {
     }
     table td:nth-child(2){
         font-weight: bold;
+    }
+    .card-buttons {
+        display: flex;
+    }
+    .card-buttons .btn {
+        margin: 4px;
     }
 </style>
